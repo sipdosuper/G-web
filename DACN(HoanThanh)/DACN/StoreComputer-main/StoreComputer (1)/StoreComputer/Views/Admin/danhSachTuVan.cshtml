@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<StoreComputer.Models.TuVanKH>
+
+@{
+    ViewBag.Title = "Danh sách tư vấn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">Danh sách tư vấn khách hàng</h2>
+
+
+
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <h6 class="m-0 font-weight-bold text-primary">
+                </h6>
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã tư vấn</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Gmail</th>
+                            <th>Kiểu tư vấn</th>
+                            <th>Lời nhắn</th>
+                            <th>Tình trạng</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.maTV</td>
+                                <td>@item.tenKH</td>
+                                <td>@item.soDienThoai</td>
+                                <td>@item.email</td>
+                                <td>@item.kieuTuVan</td>
+                                <td>@item.loiNhan</td>
+                                @if (@item.tinhTrang == "Chưa tư vấn")
+                                {
+                                    <td style="color:red">@item.tinhTrang</td>
+                                }
+                                else
+                                {
+                                    <td style="color:green">@item.tinhTrang</td>
+                                }
+                                <td>
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+
+                                                <a href="~/Admin/suaTuVan?id=@item.maTV" class="btn btn-info"> <i class="fa fa-info"></i> </a>
+                                            </div>
+                                    </h6>
+                                </td>
+</tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <br />
+    <div style="text-align:center;">
+        @Html.PagedListPager(Model, page => Url.Action("danhSachTuVan", new { page = page }))
+    </div>
+</div>

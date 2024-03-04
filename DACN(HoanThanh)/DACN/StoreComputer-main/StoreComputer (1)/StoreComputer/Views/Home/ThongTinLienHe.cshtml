@@ -1,0 +1,177 @@
+﻿@model StoreComputer.Models.TuVanKH
+    @{
+        ViewBag.Title = "G Computer";
+        Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+        string tenKhachHang = Session["tenKhachHang"] as string;
+        string email = Session["gmail"] as string;
+        string maKH = Session["maKH"] as string;
+        string sdt = Session["soDienThoai"] as string;
+    }
+    <!-- contact section -->
+    <section class="contact_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="custom_heading-container ">
+                    <h2>
+                        Yêu Cầu Tư Vấn
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="container layout_padding2">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form_contaier">
+                            <div class="form-group">
+                                <label>Tên khách hàng</label>
+                                <input type="text" class="form-control" id="tenKH" value="@tenKhachHang">
+                            </div>
+                            <div class="form-group">
+                                <label for="soDienThoai">Số Điện Thoại</label>
+                                <input type="text" class="form-control" id="soDienThoai" value="@sdt">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email </label>
+                                <input type="email" class="form-control" id="email" value="@email">
+                            </div>
+                             <div class="form-group ">
+                                <label for="kieuTuVan">Select medicine</label>
+                             <select id="kieuTuVan" class="form-control">
+                                <option selected value="Hỗ trợ bảo hành">Hỗ trợ bảo hành</option>
+                                <option value="Tư vấn sản phẩm">Tư vấn sản phẩm</option>
+                                <option value="Yêu cầu hỗ trợ">Yêu cầu hỗ trợ</option>
+                             </select>
+                             </div>
+                            <div class="form-group">
+                                <label for="loiNhan">Lời nhắn</label>
+                                <input type="text" class="form-control" id="loiNhan">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" name="ThongTinLienHe" class="btn btn-block btn-success" style="text-transform:uppercase;font-weight:bold" id="gui">Gửi hỗ trợ</button>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="detail-box">
+                        <h3>
+                            Tư Vấn Khách Hàng
+                        </h3>
+                        <p>
+                            Chúng tôi luôn hỗ trợ khách hàng 24/7 sẵn sàng tiếp nhận những góp ý của khách hàng và cải thiện hơn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end contact section -->
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="info_contact">
+                        <h4>
+                            Thông Tin Liên Hệ
+                        </h4>
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/Theme/images/telephone-symbol-button.png" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h6>
+                                    +84 8388445
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/Theme/images/email.png" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h6>
+                                    loc123456000@gmail.com
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info_menu">
+                        <h4>
+                            Danh Sách
+                        </h4>
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="Index">Trang Chủ <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="GioiThieu"> Giới Thiệu </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="MayTinh"> Laptop </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="LinhKien"> Linh Kiện Máy Tính </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info_news">
+                        <h4>
+                            tin tức
+                        </h4>
+                        <form action="">
+                            <input type="text" placeholder="Enter Your email">
+                            <div class="d-flex justify-content-center justify-content-end mt-3">
+                                <button>
+                                    Subscribe
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- end info section -->
+
+    <!--Script ajax tạo phiếu hỗ trợ-->
+    <script type="text/javascript" src="~/Theme/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#gui').click(function () {
+                var tenKH = $('#tenKH').val();
+                var soDienThoai = $('#soDienThoai').val();
+                var email = $('#email').val();
+                var kieuTuVan = $('#kieuTuVan').val();
+                var loiNhan = $('#loiNhan').val();
+                var tinhTrang = 'Chưa tư vấn'
+                var model = {
+                    tenKH: tenKH,
+                    soDienThoai: soDienThoai,
+                    email: email,
+                    kieuTuVan: kieuTuVan,
+                    loiNhan: loiNhan,
+                    tinhTrang: tinhTrang
+                };
+                $.ajax({
+                    url: '/Home/ThongTinLienHe',
+                    type: 'POST',
+                    data: model,
+                    success: function (res) {
+                        if (res.success) {
+                            window.location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>

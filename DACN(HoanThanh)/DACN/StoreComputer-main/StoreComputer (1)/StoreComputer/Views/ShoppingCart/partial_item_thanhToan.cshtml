@@ -1,0 +1,29 @@
+﻿@model IEnumerable<StoreComputer.Models.ShoppingCartItem>
+@if (Model != null && Model.Any())
+{
+    <h3 style="font-weight:bold;text-transform:uppercase;text-align:center">Giỏ hàng<span style="float:right;"></span></h3>
+    var i = 0;
+    var tongtien = decimal.Zero;
+<div style="border:2px solid #808080">
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            tongtien += item.tongTien;
+            <tr>
+                <td style="font-weight:bold">@item.tenHang</td>
+                <td>@String.Format("{0:#,##0 đ}",item.giaTien)</td>
+                <td>@item.soLuong</td>
+            </tr>
+
+        }
+        <tr>
+            <td style="font-weight:bold;text-transform:uppercase">Tổng tiền</td>
+            <td style="color: red;font-weight:bold">@String.Format("{0:#,##0 đ}", tongtien)</td>
+        </tr>
+    </table>
+</div>
+}
+else
+            {
+                <div>Bạn chưa có sản phẩm nào vui lòng quay lại trang<a href="~/Home/DanhSachLaptop" style="font-weight:bold">SẢN PHẨM</a>để mua</div>
+            }
